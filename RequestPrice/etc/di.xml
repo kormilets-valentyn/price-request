@@ -1,0 +1,30 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<config xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="urn:magento:framework:ObjectManager/etc/config.xsd">
+    <preference for="Magento\Catalog\Pricing\Render\FinalPriceBox"
+                type="Vkormilets\RequestPrice\Pricing\Render\FinalPriceBox" />
+    <preference for="Vkormilets\RequestPrice\Api\Data\PriceInterface"
+                type="Vkormilets\RequestPrice\Model\Model"/>
+    <preference for="Vkormilets\RequestPrice\Api\PriceRepositoryInterface"
+                type="Vkormilets\RequestPrice\Model\PriceRepository"/>
+    <preference for="Vkormilets\RequestPrice\Api\Model\Data\PriceSearchResultInterface"
+                type="Magento\Framework\Api\Search\SearchResult"/>
+    <type name="Magento\Catalog\Pricing\Render\FinalPriceBox">
+        <plugin name="cataloghideprice_finalpricebox" type="Vkormilets\RequestPrice\Plugin\FinalPriceBox"/>
+    </type>
+    <type name="Vkormilets\RequestPrice\Model\ResourceModel\Collection\Grid\Collection">
+        <arguments>
+            <argument name="mainTable" xsi:type="string">require_price_grid</argument>
+            <argument name="eventPrefix" xsi:type="string">require_price_grid_collection</argument>
+            <argument name="eventObject" xsi:type="string">require_price_grid_collection</argument>
+            <argument name="resourceModel" xsi:type="string">Vkormilets\RequestPrice\Model\ResourceModel\ResourceModel</argument>
+        </arguments>
+    </type>
+    <type name="Magento\Framework\View\Element\UiComponent\DataProvider\CollectionFactory">
+        <arguments>
+            <argument name="collections" xsi:type="array">
+                <item name="require_price_grid_listing_data_source"
+                      xsi:type="string">Vkormilets\RequestPrice\Model\ResourceModel\Collection\Grid\Collection</item>
+            </argument>
+        </arguments>
+    </type>
+</config>

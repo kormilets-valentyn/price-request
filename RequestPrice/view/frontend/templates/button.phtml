@@ -1,0 +1,55 @@
+<?php
+/** @var Vkormilets\RequestPrice\Block\PriceRequestBlock $block*/
+?>
+
+<div id="modal-form" style="display: none">
+    <form class="form" id="custom-form" method="post" autocomplete="off">
+        <fieldset class="fieldset">
+            <legend class="legend"><span><?php echo __('Personal Information') ?></span></legend><br>
+            <div class="field required">
+                <label for="customer_name" class="label"><span><?php echo __('Name') ?></span></label>
+                <div class="control">
+                    <input type="text" name="name" id="customer_name" value="" title="<?php echo __('Name') ?>" class="input-text" data-validate="{required:true}">
+                </div>
+            </div>
+            <div class="field required">
+                <label for="email_address" class="label"><span><?php echo __('Email') ?></span></label>
+                <div class="control">
+                    <input type="email" name="email" id="email_address" value="" title="<?php echo __('Email') ?>" class="input-text" data-validate="{required:true, 'validate-email':true}">
+                </div>
+            </div>
+            <div class="field">
+                <label for="comment" class="label"><span><?php echo __('Comment') ?></span></label>
+                <div class="text">
+                    <input type="text" name="comment" id="comment" value="" title="<?php echo __('Comment') ?>" class="input-text">
+                </div>
+            </div>
+            <input type="hidden" name="sku" id="sku" value="<?=$block->getSku()?>" class="input-text">
+        </fieldset>
+        <div class="actions-toolbar">
+            <div class="primary">
+                <button id="submit-button" type="submit" class="action submit primary" title="<?php  echo __('Submit') ?>"><span><?php echo __('Submit') ?></span></button>
+            </div>
+        </div>
+    </form>
+</div>
+        <button id = "popup-open" class="action primary open-modal-form">
+            <span><?=__('Request Price')?></span>
+        </button>
+<style type="text/css">
+    .modal-popup .modal-inner-wrap{ width: 30%; }
+</style>
+
+<script type="text/x-magento-init">
+    {
+        ".open-modal-form": {
+            "Vkormilets_RequestPrice/js/popup": {}
+        },
+        "#custom-form": {
+            "validation": {}
+        },
+        "*": {
+            "Vkormilets_RequestPrice/js/ajax": {}
+        }
+    }
+</script>
